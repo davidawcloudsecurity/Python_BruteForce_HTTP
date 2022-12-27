@@ -8,7 +8,7 @@ prev_status_code = None
 prev_response_length = None
 
 # Open the username file in read mode
-with open('./users.txt', 'r') as username_file:
+with open('./file.txt', 'r') as username_file:
   # Read the usernames from the file, one line at a time
   for username in username_file:
     # Remove the newline character from the end of the username
